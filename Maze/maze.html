@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze Runner</title>
+    <link rel="stylesheet" href="../styles/css/maze.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="player"></div>
+        <div id="goal"></div>
+        <div class="wall wall1"></div>
+        <div class="wall wall2"></div>
+        <div class="wall wall3"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>    
+    <script >
+        $(document).ready(function(){
+            let player = $('#player')
+            let goal = $('#goal')
+            let container = $("#game-container")
+            let speed = 5
+            // Inital player location
+            let position = {
+                top: parseInt(player.css('top')),
+                left: parseInt(player.css('left')),
+            }
+            // Function for handling key press events for movement
+            $(document).on('keydown', function(event){
+                let newTop = position.top
+                let newLeft = position.left
+
+                switch(event.which){
+                    case 37: // Left arrow
+                        newLeft -= speed
+                        break;
+                    case 38: // Up arrow
+                        newTop -= speed
+                        break;
+                    case 39: // Right arrow
+                        newLeft += speed
+                        break;
+                    case 40: // Down arrow
+                        newTop += speed
+                        break;
+                }
+
+
+                //Check for wall collisions
+                let collision = false
+                $('.wall').each(function(){
+                    let wall = $(this)[0].getBoundingClientRect()
+                    let playerRect = {top:newTop, left:newLeft, right: newLeft +20, bottom:newTop +20}
+
+                    if(
+                        playerRect.right > wall.left && 
+                        playerRect.right < wall.right && 
+                        playerRect.bottom < wall.top && 
+                        playerRect.top < wall.bottom
+                    ){
+                        collision = true
+                        return false
+                    }
+                })
+
+                if(!collision){
+                    position.top = newTop
+                    position.left = newLeft
+                    player.css({top: position.top, left: position.left})
+                }
+
+                let playerBox = player[0].getBoundingClientRect()
+                let goalBox = goal[0].getBoundingClientRect()
+                if(
+                    playerBox.right > goalBox.left &&
+                    playerBox.left < goalBox.right &&
+                    playerBox.bottom > goalBox.top &&
+                    playerBox.top < goalBox.bottom
+                ){
+                    alert('Congratulations! You found the goal.')
+                    location.reload()
+                }
+            })
+
+        })
+    </script>
+</body>
+</html>

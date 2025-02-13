@@ -1,0 +1,56 @@
+*,
+*::before,
+*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+}
+
+
+// For individial slides for the slideshow
+// Landscape Images for slideshow
+#slider{
+    width: 720px;
+    height: 400px;
+    overflow: hidden;
+    margin: auto;
+
+    .slides{
+        // Area for the slides horizontally (container)
+        display: block;
+        width: 6000px;
+        height: 400px;
+        margin: 0;
+        padding: 0;
+    }
+    .slide{
+        float: left;
+        width: 720px;
+        height: 400px;
+        list-style-type: none;
+    }
+}
+
+.slide1{
+    background-color: red;
+}
+
+.slide2{
+    background-color: blue;
+}
+
+.slide3{
+    background-color: greenyellow;
+}
+
+.slide4{
+    background-color: purple;
+}
+
+.slide5{
+    background-color: pink;
+}
