@@ -1,12 +1,11 @@
 $(document).ready(function(){
-
     // Settings for the slide
     // We need to know the width of the slide so that we know how far it should slide in
     var width = 720
     // We want the slider transitions to be 2 seconds long
     var animationSpeed = 2000
     // jQuery will queue up events so make sure that you add your animation speed to the pause or it will keep running forever
-    var pause = animationSpeed + 500
+    var pause = animationSpeed + 1000
     var currentSlide = 1
 
     // Cached DOM elements
